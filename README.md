@@ -109,7 +109,7 @@ To get a local copy up and running follow these simple example steps.
 2.  Run the following command:
 
 ```sh
- npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+ npx tailwindcss -i ./src/input.css -o dist/output.css --watch
 ```
 3.  Run the Project in a Server
 
