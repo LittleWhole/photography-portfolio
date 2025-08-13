@@ -6,6 +6,11 @@ export async function GET(
   _req: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  // Prevent bundling public/photos into a serverless function on Vercel
+  if (process.env.VERCEL) {
+    return NextResponse.json({ files: [] });
+  }
+
   const { slug } = await params;
   try {
     const dir = path.join(process.cwd(), "public", "photos", slug);

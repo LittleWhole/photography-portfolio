@@ -11,7 +11,11 @@ type Params = {
   params: Promise<{ slug: string }>;
 };
 
-export const dynamic = "force-dynamic";
+export const generateStaticParams = async () => {
+  const genres = await getGenres();
+  return genres.map((g) => ({ slug: g.slug }));
+};
+
 
 export async function generateMetadata({ params }: Params) {
   const { slug } = await params;

@@ -3,11 +3,7 @@ import { getGenres } from "@/lib/gallery";
 import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
-export const metadata = {
-  title: "Work",
-};
-
-export const dynamic = "force-dynamic";
+export const metadata = { title: "Work" };
 
 export default async function WorkPage() {
   const genres = await getGenres();
