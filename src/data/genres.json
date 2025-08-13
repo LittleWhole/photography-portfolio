@@ -1,0 +1,80 @@
+{
+  "portraits": {
+    "title": "Portraits",
+    "description": "You want portraits where you still feel like you - clean light, flattering angles, and relaxed direction. We’ll make images that look like you on your best day - confident, approachable, and real.",
+    "captions": {
+      "example.jpg": "Professional headshot session"
+    },
+    "order": 1
+  },
+  "events": {
+    "title": "Events",
+    "description": "You focus on your guests; I’ll quietly document the story - big moments and small details - with clean, consistent coverage you can share right away.",
+    "captions": {
+      "example.jpg": "Wedding ceremony moment"
+    },
+    "order": 3
+  },
+  "graduation": {
+    "title": "Graduation",
+    "description": "You’ve earned it. We’ll make relaxed portraits on campus that feel celebratory and timeless - photos you’ll be proud to send to family and post the same day.",
+    "captions": {
+      "example.jpg": "Graduation day celebration"
+    },
+    "order": 2
+  },
+  "landscapes-and-travel": {
+    "title": "Landscapes & Travel",
+    "description": "For you who love big skies and quiet places - clean, color‑true images that make you want to be there. Available as prints and licensing.",
+    "captions": {
+      "1.jpg": "📍 Tottori City, Tottori, Japan",
+      "2.jpg": "📍 Turpan, Xinjiang, China",
+      "3.jpg": "📍 Nagoya, Aichi, Japan",
+      "4.JPG": "📍 Lanzhou, Gansu, China"
+    },
+    "order": 4
+  },
+  "products": {
+    "title": "Products",
+    "description": "You need images that sell: crisp lighting, consistent styling, and scroll‑stopping detail. Studio or on‑location, I’ll deliver clean, on‑brand photos ready for web and print.",
+    "captions": {
+      "example.jpg": "Studio product on seamless"
+    },
+    "order": 6
+  },
+  "street": {
+    "title": "Street",
+    "description": "Candid, in‑between moments with strong composition - honest slices of the city that feel alive and unposed.",
+    "captions": {
+      "1.JPG": "📍 Lanzhou, Gansu, China",
+      "2.JPG": "📍 Lanzhou, Gansu, China"
+    },
+    "order": 7
+  },
+  "cosplay": {
+    "title": "Cosplay",
+    "description": "You want images that capture the magic of your costume. We’ll make photos that feel like you’re part of the story - authentic, tangible, and true to you.",
+    "captions": {
+      "example.jpg": "Cosplay photo"
+    },
+    "order": 5,
+    "cover": "DSC_7994.jpg",
+    "coverOffsetY": 20
+  },
+  "nature": {
+    "title": "Nature",
+    "description": "The beauty of the natural world, as shot by me.",
+    "captions": {
+      "example.jpg": "Nature photo"
+    },
+    "order": 8
+  },
+  "miscellaneous": {
+    "title": "Miscellaneous",
+    "description": "A collection of images that don't fit into any other genre.",
+    "captions": {
+      "example.jpg": "Miscellaneous photo"
+    },
+    "order": 9
+  }
+}

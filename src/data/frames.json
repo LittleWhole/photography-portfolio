@@ -1,0 +1,17 @@
+{
+  "default": { "framePx": 0, "frameColor": "#ffffff" },
+  "genres": {
+    "portraits": { "framePx": 36, "frameColor": "#ffffff" },
+    "street": { "framePx": 24, "frameColor": "#ffffff" },
+    "graduation": { "framePx": 48, "frameColor": "#ffffff" },
+    "landscapes-and-travel": { "framePx": 48, "frameColor": "#ffffff" },
+    "cosplay": { "framePx": 36, "frameColor": "#ffffff" },
+    "nature": { "framePx": 36, "frameColor": "#ffffff" },
+    "miscellaneous": { "framePx": 0, "frameColor": "#ffffff" }
+  },
+  "images": {
+
+  }
+}
+
+

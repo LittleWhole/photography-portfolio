@@ -1,0 +1,42 @@
+{
+  "graduation": [
+    {
+      "src": "/photos/graduation/DSCF5282.jpg",
+      "w": 4,
+      "h": 3
+    },
+    {
+      "src": "/photos/graduation/DSCF5329.jpg",
+      "w": 4,
+      "h": 3
+    },
+    {
+      "src": "/photos/graduation/DSCF5560.jpg",
+      "w": 4,
+      "h": 3
+    },
+    {
+      "src": "/photos/graduation/DSCF4660.JPG",
+      "w": 4,
+      "h": 3
+    },
+    {
+      "src": "/photos/graduation/DSCF4660.JPG",
+      "w": 4,
+      "h": 6,
+      "c": 9
+    },
+    {
+      "src": "/photos/graduation/DSCF5282.jpg",
+      "w": 4,
+      "h": 3
+    },
+    {
+      "src": "/photos/graduation/DSCF5329.jpg",
+      "w": 4,
+      "h": 3,
+      "c": 4,
+      "r": 3
+    }
+  ]
+}
