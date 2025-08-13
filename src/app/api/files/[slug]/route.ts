@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 
 export async function GET(
   _req: Request,
@@ -13,12 +11,14 @@ export async function GET(
 
   const { slug } = await params;
   try {
-    const dir = path.join(process.cwd(), "public", "photos", slug);
-    const entries = await fs.promises.readdir(dir, { withFileTypes: true });
+    const pathMod = await import("node:path");
+    const fsPromises = await import("node:fs/promises");
+    const dir = pathMod.join(process.cwd(), "public", "photos", slug);
+    const entries = (await fsPromises.readdir(dir)) as string[];
     const exts = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
     const files = entries
-      .filter((e) => e.isFile() && exts.has(path.extname(e.name).toLowerCase()))
-      .map((e) => e.name)
+      .filter((name) => exts.has(pathMod.extname(name).toLowerCase()))
+      .map((name) => name)
       .sort();
     return NextResponse.json({ files });
   } catch {
