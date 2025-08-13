@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = { title: "Work" };
+export const dynamic = "force-static";
+export const revalidate = false;
 
 export default async function WorkPage() {
   const genres = await getGenres();

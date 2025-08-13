@@ -16,6 +16,9 @@ export const generateStaticParams = async () => {
   return genres.map((g) => ({ slug: g.slug }));
 };
 
+export const dynamic = "error";
+export const revalidate = false;
+
 
 export async function generateMetadata({ params }: Params) {
   const { slug } = await params;
