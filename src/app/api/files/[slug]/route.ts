@@ -4,24 +4,21 @@ export async function GET(
   _req: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  // Prevent bundling public/photos into a serverless function on Vercel
-  if (process.env.VERCEL) {
-    return NextResponse.json({ files: [] });
-  }
-
   const { slug } = await params;
+  
   try {
-    const pathMod = await import("node:path");
-    const fsPromises = await import("node:fs/promises");
-    const dir = pathMod.join(process.cwd(), "public", "photos", slug);
-    const entries = (await fsPromises.readdir(dir)) as string[];
-    const exts = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
-    const files = entries
-      .filter((name) => exts.has(pathMod.extname(name).toLowerCase()))
-      .map((name) => name)
-      .sort();
+    // Use manifest instead of filesystem scanning to avoid bundling photos
+    const photosManifest = (await import("@/data/photos-manifest.json")).default as { genres?: Record<string, { files: { filename: string; width: number; height: number }[] }> };
+    const genreData = photosManifest.genres?.[slug];
+    
+    if (!genreData) {
+      return NextResponse.json({ files: [] });
+    }
+    
+    const files = genreData.files.map(f => f.filename);
     return NextResponse.json({ files });
-  } catch {
+  } catch (error) {
+    console.error("Error reading files:", error);
     return NextResponse.json({ files: [] });
   }
 }

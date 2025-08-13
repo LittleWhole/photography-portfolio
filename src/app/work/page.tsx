@@ -1,14 +1,31 @@
 import Link from "next/link";
-import { getGenres } from "@/lib/gallery";
 import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = { title: "Work" };
 export const dynamic = "force-static";
-export const revalidate = false;
 
 export default async function WorkPage() {
-  const genres = await getGenres();
+  // Import manifest and genres config directly - no file system access
+  const photosManifest = (await import("@/data/photos-manifest.json")).default as { genres?: Record<string, { files: { filename: string; width: number; height: number }[] }> };
+  const genresConfig = (await import("@/data/genres.json")).default;
+  
+  // Build genres array from manifest and config
+  const genreEntries = Object.entries(photosManifest.genres || {});
+  const genres = genreEntries.map(([slug, data]) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const config = genresConfig[slug as keyof typeof genresConfig] as any;
+    return {
+      slug,
+      title: config?.title || slug.charAt(0).toUpperCase() + slug.slice(1),
+      description: config?.description,
+      coverSrc: config?.cover ? `/photos/${slug}/${config.cover}` : data.files[0] ? `/photos/${slug}/${data.files[0].filename}` : undefined,
+      coverOffsetX: config?.coverOffsetX,
+      coverOffsetY: config?.coverOffsetY,
+      order: config?.order ?? 999,
+      count: data.files.length,
+    };
+  }).sort((a, b) => a.order - b.order);
   return (
     <section className="space-y-8">
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight bg-gradient-to-b from-black to-neutral-600 dark:from-white dark:to-neutral-400 bg-clip-text text-transparent">
