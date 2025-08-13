@@ -1,17 +1,8 @@
-import { cn } from "@/lib/utils";
-import { Card, CardContent } from "./ui/card";
+import { Card } from "./ui/card";
 
-export default function SectionLead({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+export default function SectionLead({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="py-4 px-8">  
-          {children}
-    </Card>
+    <Card className="py-4 px-8">{children}</Card>
   );
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import genresData from "@/data/genres.json";
 
 function authOk() {
@@ -40,7 +40,7 @@ export default function GridEditor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allowed, genre]);
 
-  const totalCols = 12;
+  const totalCols = 12; // reserved for future grid preview
 
   const [files, setFiles] = useState<string[]>([]);
   useEffect(() => {

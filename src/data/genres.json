@@ -13,7 +13,7 @@
     "captions": {
       "example.jpg": "Wedding ceremony moment"
     },
-    "order": 3
+    "order": 4
   },
   "graduation": {
     "title": "Graduation",
@@ -30,9 +30,11 @@
       "1.jpg": "📍 Tottori City, Tottori, Japan",
       "2.jpg": "📍 Turpan, Xinjiang, China",
       "3.jpg": "📍 Nagoya, Aichi, Japan",
-      "4.JPG": "📍 Lanzhou, Gansu, China"
+      "4.JPG": "📍 Lanzhou, Gansu, China",
+      "5.jpg": "📍 Sharpsburg, Maryland, USA"
     },
-    "order": 4
+    "order": 3,
+    "cover": "2.jpg"
   },
   "products": {
     "title": "Products",

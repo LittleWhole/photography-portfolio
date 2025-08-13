@@ -4,7 +4,8 @@ import genresData from "@/data/genres.json";
 type GenresData = typeof genresData;
 import MasonryGrid from "@/components/MasonryGrid";
 import SectionLead from "@/components/SectionLead";
-import { ArrowLeft, LucideArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 type Params = {
   params: Promise<{ slug: string }>;
@@ -32,9 +33,9 @@ export default async function WorkGenrePage({ params }: Params) {
   return (
     <section className="space-y-6">
       <div className="flex items-center gap-3">
-        <a href="/work" className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-black/10 dark:border-white/15 hover:bg-black/5 dark:hover:bg-white/10" aria-label="Back to Work">
+        <Link href="/work" className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-black/10 dark:border-white/15 hover:bg-black/5 dark:hover:bg-white/10" aria-label="Back to Work">
           <ArrowLeft className="h-4 w-4" />
-        </a>
+        </Link>
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight bg-gradient-to-b from-black to-neutral-600 dark:from-white dark:to-neutral-400 bg-clip-text text-transparent">
           {data[slug as keyof GenresData].title}
         </h1>

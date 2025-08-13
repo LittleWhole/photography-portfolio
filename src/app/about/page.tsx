@@ -71,13 +71,6 @@ function AboutCard() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/[0.04] p-4 ring-1 ring-black/5 dark:ring-white/10">
-      <div className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{label}</div>
-      <div className="mt-1 text-base font-medium text-neutral-900 dark:text-neutral-100">{value}</div>
-    </div>
-  );
-}
+// Stat component not used currently
 
 
