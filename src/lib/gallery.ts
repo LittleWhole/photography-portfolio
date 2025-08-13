@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { imageSize } from "image-size";
 import ExifParser from "exif-parser";
+import photosManifest from "@/data/photos-manifest.json";
 
 export type Genre = {
   slug: string;
@@ -196,56 +197,34 @@ function mergeFrameStyles(
 }
 
 export async function getImagesForGenre(slug: string): Promise<GalleryImage[]> {
-  const dir = path.join(PHOTOS_ROOT, slug);
-  if (!fs.existsSync(dir)) return [];
+  const manifest = (photosManifest as unknown as { genres?: Record<string, { files: { filename: string; width: number; height: number }[] }> }).genres || {};
+  const entry = manifest[slug];
+  if (!entry) return [];
   const frames = await loadFramesConfig();
   const genresConfig = await loadGenresConfig();
   const layouts = await loadLayoutsConfig();
 
-  const files = await fs.promises.readdir(dir);
   const images: GalleryImage[] = [];
-  for (const file of files) {
-    if (!isImageFile(file)) continue;
-    const filePath = path.join(dir, file);
-    try {
-      const fileBuffer = await fs.promises.readFile(filePath);
-      const dims = imageSize(fileBuffer);
-      if (!dims.width || !dims.height) continue;
-
-      // Correct orientation if present so width/height reflect display orientation
-      try {
-        const exif = ExifParser.create(fileBuffer).parse();
-        const orientation = exif.tags.Orientation as number | undefined;
-        if (orientation && [5, 6, 7, 8].includes(orientation)) {
-          const w = dims.width;
-          dims.width = dims.height;
-          dims.height = w;
-        }
-      } catch {}
-      const src = `/photos/${slug}/${file}`;
-      const defaultAlt = toTitleCase(path.basename(file, path.extname(file)));
-      
-      // Get custom caption from config, fallback to default alt
-      const genreConfig = genresConfig[slug];
-      const customCaption = genreConfig?.captions?.[file] ?? genreConfig?.title;
-      const alt = customCaption ?? defaultAlt;
-      
-      const layoutForGenre = layouts[slug] || {};
-      const layout = layoutForGenre[file] ? { ...layoutForGenre[file] } : undefined;
-
-      images.push({
-        src,
-        width: dims.width,
-        height: dims.height,
-        filename: file,
-        alt,
-        caption: customCaption,
-        frame: resolveFrameStyle(frames, slug, file),
-        layout,
-      });
-    } catch {
-      // skip unreadable image
-    }
+  for (const f of entry.files) {
+    const file = f.filename;
+    const dims = { width: f.width, height: f.height };
+    const src = `/photos/${slug}/${file}`;
+    const defaultAlt = toTitleCase(path.basename(file, path.extname(file)));
+    const genreConfig = genresConfig[slug];
+    const customCaption = genreConfig?.captions?.[file] ?? genreConfig?.title;
+    const alt = customCaption ?? defaultAlt;
+    const layoutForGenre = layouts[slug] || {};
+    const layout = layoutForGenre[file] ? { ...layoutForGenre[file] } : undefined;
+    images.push({
+      src,
+      width: dims.width,
+      height: dims.height,
+      filename: file,
+      alt,
+      caption: customCaption,
+      frame: resolveFrameStyle(frames, slug, file),
+      layout,
+    });
   }
 
   // Stable order by filename
