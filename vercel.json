@@ -1,6 +1,9 @@
 {
   "functions": {
-    "api/**": {
+    "app/api/**/route.js": {
+      "excludeFiles": "public/**"
+    },
+    "app/api/**/route.ts": {
       "excludeFiles": "public/**"
     }
   }
