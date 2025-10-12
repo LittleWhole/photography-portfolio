@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 
 export default async function WorkPage() {
   // Import manifest and genres config directly - no file system access
-  const photosManifest = (await import("@/data/photos-manifest.json")).default as { genres?: Record<string, { files: { filename: string; width: number; height: number }[] }> };
+  const photosManifest = (await import("@/data/photos-manifest.json")).default as { genres?: Record<string, { files: { filename: string; width: number; height: number; thumb?: { src: string; width: number; height: number } }[] }> };
   const genresConfig = (await import("@/data/genres.json")).default;
   
   // Build genres array from manifest and config
@@ -19,7 +19,7 @@ export default async function WorkPage() {
       slug,
       title: config?.title || slug.charAt(0).toUpperCase() + slug.slice(1),
       description: config?.description,
-      coverSrc: config?.cover ? `/photos/${slug}/${config.cover}` : data.files[0] ? `/photos/${slug}/${data.files[0].filename}` : undefined,
+      coverSrc: config?.cover ? `/photos/${slug}/${config.cover}` : data.files[0] ? (data.files[0].thumb?.src ?? `/photos/${slug}/${data.files[0].filename}`) : undefined,
       coverOffsetX: config?.coverOffsetX,
       coverOffsetY: config?.coverOffsetY,
       order: config?.order ?? 999,

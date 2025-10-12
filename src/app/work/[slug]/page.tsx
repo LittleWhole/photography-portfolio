@@ -23,7 +23,7 @@ export default async function WorkGenrePage({ params }: Params) {
   const { slug } = await params;
   
   // Import manifest and genres config directly - no file system access
-  const photosManifest = (await import("@/data/photos-manifest.json")).default as { genres?: Record<string, { files: { filename: string; width: number; height: number }[] }> };
+  const photosManifest = (await import("@/data/photos-manifest.json")).default as { genres?: Record<string, { files: { filename: string; width: number; height: number; thumb?: { src: string; width: number; height: number }; blurDataURL?: string }[] }> };
   const genresConfig = (await import("@/data/genres.json")).default;
   const framesConfig = (await import("@/data/frames.json")).default;
   const layoutsConfig = (await import("@/data/layouts.json")).default;
@@ -61,6 +61,8 @@ export default async function WorkGenrePage({ params }: Params) {
       caption: customCaption,
       frame: frame.framePx ? frame : undefined,
       layout,
+      thumb: f.thumb,
+      blurDataURL: f.blurDataURL,
     };
   });
 

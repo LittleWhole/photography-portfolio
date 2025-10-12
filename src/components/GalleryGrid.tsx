@@ -91,11 +91,13 @@ export default function GalleryGrid({ images, itemMinWidth = 280, gap = 16 }: Ga
               >
                 <div className="relative w-full" style={{ aspectRatio: `${img.width}/${img.height}` }} data-masonry-content>
                   <Image
-                    src={img.src}
+                    src={img.thumb?.src || img.src}
                     alt={img.alt}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-contain bg-white"
+                    placeholder={img.blurDataURL ? "blur" : undefined}
+                    blurDataURL={img.blurDataURL}
                   />
                    {hasFrame && (
                     <div

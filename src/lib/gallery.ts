@@ -46,6 +46,8 @@ export type GalleryImage = {
   caption?: string;
   frame?: FrameStyle;
   layout?: { c?: number; r?: number; w?: number; h?: number };
+  thumb?: { src: string; width: number; height: number };
+  blurDataURL?: string;
 };
 
 const PROJECT_ROOT = process.cwd();
@@ -197,7 +199,7 @@ function mergeFrameStyles(
 }
 
 export async function getImagesForGenre(slug: string): Promise<GalleryImage[]> {
-  const manifest = (photosManifest as unknown as { genres?: Record<string, { files: { filename: string; width: number; height: number }[] }> }).genres || {};
+  const manifest = (photosManifest as unknown as { genres?: Record<string, { files: Array<{ filename: string; width: number; height: number; thumb?: { src: string; width: number; height: number }; blurDataURL?: string }> }> }).genres || {};
   const entry = manifest[slug];
   if (!entry) return [];
   const frames = await loadFramesConfig();
@@ -224,6 +226,8 @@ export async function getImagesForGenre(slug: string): Promise<GalleryImage[]> {
       caption: customCaption,
       frame: resolveFrameStyle(frames, slug, file),
       layout,
+      thumb: f.thumb ? { src: f.thumb.src, width: f.thumb.width, height: f.thumb.height } : undefined,
+      blurDataURL: f.blurDataURL,
     });
   }
 

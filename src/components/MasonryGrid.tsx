@@ -88,7 +88,15 @@ export default function MasonryGrid({ images, minColumnWidth = 280, gap = 16, co
             >
               <div className="relative w-full h-full" style={{ padding: framePx, background: frameColor, boxSizing: "border-box" }}>
                 <div className="relative w-full h-full">
-                  <Image src={img.src} alt={img.alt} fill className="object-cover bg-white" sizes="100vw" />
+                  <Image
+                    src={img.thumb?.src || img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover bg-white"
+                    sizes="100vw"
+                    placeholder={img.blurDataURL ? "blur" : undefined}
+                    blurDataURL={img.blurDataURL}
+                  />
                 </div>
               </div>
             </button>
